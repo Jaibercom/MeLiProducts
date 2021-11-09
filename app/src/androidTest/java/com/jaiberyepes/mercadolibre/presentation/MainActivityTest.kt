@@ -41,25 +41,25 @@ class MainActivityTest {
     fun characterListTest() {
         onView(
             allOf(
-                withId(R.id.item_name), withText("Walter White")
+                withId(R.id.item_title), withText("Walter White")
             )
         ).check(matches(isDisplayed()))
 
         onView(
             allOf(
-                withId(R.id.item_nick_name), withText("Heisenberg")
+                withId(R.id.item_price), withText("Heisenberg")
             )
         ).check(matches(isDisplayed()))
 
         onView(
             allOf(
-                withId(R.id.item_name), withText("Jesse Pinkman")
+                withId(R.id.item_title), withText("Jesse Pinkman")
             )
         ).check(matches(isDisplayed()))
 
         onView(
             allOf(
-                withId(R.id.item_nick_name), withText("Cap n' Cook")
+                withId(R.id.item_price), withText("Cap n' Cook")
             )
         ).check(matches(isDisplayed()))
     }
@@ -68,7 +68,7 @@ class MainActivityTest {
     fun characterDetailTest() {
         onView(
             allOf(
-                withId(R.id.item_nick_name), withText("Heisenberg")
+                withId(R.id.item_price), withText("Heisenberg")
             )
         ).check(matches(isDisplayed()))
 
@@ -76,7 +76,7 @@ class MainActivityTest {
             allOf(
                 childAtPosition(
                     allOf(
-                        withId(R.id.charactersEpoxyRecyclerView),
+                        withId(R.id.searchEpoxyRecyclerView),
                         childAtPosition(
                             withId(R.id.charactersLayout),
                             0

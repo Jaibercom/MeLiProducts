@@ -2,6 +2,7 @@ package com.jaiberyepes.mercadolibre.domain.repository
 
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterUI
+import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import com.jaiberyepes.mercadolibre.util.Output
 
 /**
@@ -9,7 +10,9 @@ import com.jaiberyepes.mercadolibre.util.Output
  *
  * @author jaiber.yepes
  */
-interface CharactersRepository {
+interface Repository {
+
+    suspend fun getProductsFromSearch(keyword: String, offset: Int): Output<List<ProductUI>>
 
     suspend fun getCharacters(): Output<List<CharacterUI>>
 

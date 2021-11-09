@@ -13,7 +13,7 @@ import javax.inject.Inject
  *
  * @author jaiber.yepes
  */
-class CharactersCacheDataSource @Inject constructor(
+class CacheDataSource @Inject constructor(
     private val charactersDao: CharactersDao
 ) {
 

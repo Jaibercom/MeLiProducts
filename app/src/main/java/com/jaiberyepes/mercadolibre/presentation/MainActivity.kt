@@ -14,9 +14,9 @@ import com.jaiberyepes.mercadolibre.presentation.viewmodel.CharactersViewModel.C
 import com.jaiberyepes.mercadolibre.presentation.viewmodel.CharactersViewModelFactory
 import com.jaiberyepes.mercadolibre.util.extensions.observe
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_main.toolbar
+import timber.log.Timber
 
 /**
  * Activity for the Main Entry-Point.
@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     // Navigation
-    private val charactersNavController: NavController by lazy {
-        findNavController(R.id.charactersNavHostFragment)
+    private val navController: NavController by lazy {
+        findNavController(R.id.navHostFragment)
     }
 
     private val onDestinationChangedListener = NavController.OnDestinationChangedListener { _, destination, _ ->
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 //                toolbar.title = getText(R.string.character_details)
 //            }
             else -> {
-                toolbar.title = getText(R.string.characters)
+                toolbar.title = getText(R.string.meli)
             }
         }
     }
@@ -53,8 +53,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         // ViewModel
-        charactersViewModel = ViewModelProvider(this, charactersViewModelFactory)
-                .get(CharactersViewModel::class.java)
+        charactersViewModel = ViewModelProvider(this, charactersViewModelFactory)[CharactersViewModel::class.java]
         observe(charactersViewModel.currentViewLiveData, ::onCharactersViewChange)
     }
 
@@ -64,15 +63,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setSupportActionBar(toolbar)
 
         appBarConfiguration = AppBarConfiguration(setOf(R.id.charactersFragment))
-        setupActionBarWithNavController(charactersNavController, appBarConfiguration)
-        charactersNavController.addOnDestinationChangedListener(onDestinationChangedListener)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navController.addOnDestinationChangedListener(onDestinationChangedListener)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return charactersNavController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun onCharactersViewChange(destination: CharactersViewModel.CharactersView) {
+    private fun onCharactersViewChange(destination: CharactersView) {
         Timber.d("onCharactersViewChange")
         when (destination) {
             is CharactersView.CharactersFragment -> showCharactersFragment()
@@ -82,12 +81,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun showCharactersFragment() {
         Timber.d("showCharactersFragment")
-        charactersNavController.navigate(R.id.charactersFragment)
+        navController.navigate(R.id.charactersFragment)
     }
 
     private fun showCharacterDetailsFragment(id: Int) {
         Timber.d("showCharacterDetailsFragment")
         val action = CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailsFragment(id)
-        charactersNavController.navigate(action)
+        navController.navigate(action)
     }
 }

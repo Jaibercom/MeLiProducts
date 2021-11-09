@@ -2,6 +2,7 @@ package com.jaiberyepes.mercadolibre.di
 
 import com.jaiberyepes.mercadolibre.presentation.CharacterDetailsFragment
 import com.jaiberyepes.mercadolibre.presentation.CharactersFragment
+import com.jaiberyepes.mercadolibre.presentation.search.SearchFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -12,6 +13,9 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class FragmentModule {
+
+    @ContributesAndroidInjector
+    abstract fun bindSearchFragment(): SearchFragment
 
     @ContributesAndroidInjector
     abstract fun bindCharactersFragment(): CharactersFragment

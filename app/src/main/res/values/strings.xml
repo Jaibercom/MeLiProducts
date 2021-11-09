@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MeLi</string>
+
+    <string name="search_text">Search Word</string>
+
+    <!-- Characters View -->
+    <string name="meli">Mercado Libre</string>
+
+    <!-- Loading Messages -->
+    <string name="general_loading_message">Loading</string>
+    <string name="empty_loading_message" />
+
+    <!-- Error Messages -->
+    <string name="general_error_title">Please try again</string>
+    <string name="general_error_message">We\'re having trouble loading the data</string>
+
+    <!-- Characters View -->
+    <string name="characters">Breaking Bad Characters</string>
+    <string name="search_hint">Search</string>
+    <string name="character_details">Character Details</string>
+    <string name="character_image_cont_desc">Character Image</string>
+
+    <!-- Characters Error Messages -->
+    <string name="characters_error_message">We\'re having trouble loading the characters</string>
+    <string name="characters_search_error_message">Sorry, no characters found with the given search</string>
+
+    <!-- Character Error Messages -->
+    <string name="character_details_error_message">We\'re having trouble loading the character details</string>
+    <string name="portrayed_message">Portrayed:</string>
+    <string name="status_message">Status:</string>
+    <string name="occupation_message">Occupation:</string>
+</resources>

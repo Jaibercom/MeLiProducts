@@ -56,8 +56,8 @@ abstract class CharacterModel : EpoxyModelWithHolder<CharacterModel.CharactersHo
         lateinit var container: View
 
         override fun bindView(itemView: View) {
-            nameView = itemView.findViewById(R.id.item_name)
-            nickNameView = itemView.findViewById(R.id.item_nick_name)
+            nameView = itemView.findViewById(R.id.item_title)
+            nickNameView = itemView.findViewById(R.id.item_price)
             imageView = itemView.findViewById(R.id.item_image)
             favoriteView = itemView.findViewById(R.id.item_favorite)
             container = itemView

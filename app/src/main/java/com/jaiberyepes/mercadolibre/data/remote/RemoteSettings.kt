@@ -8,5 +8,6 @@ package com.jaiberyepes.mercadolibre.data.remote
 object RemoteSettings {
 
     // End points
-    const val API_BASE_URL = "https://www.breakingbadapi.com/api/"
+//    const val API_BASE_URL = "https://www.breakingbadapi.com/api/"
+    const val API_BASE_URL = "https://api.mercadolibre.com/"
 }

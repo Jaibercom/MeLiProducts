@@ -1,7 +1,7 @@
 package com.jaiberyepes.mercadolibre.di
 
-import com.jaiberyepes.mercadolibre.data.CharactersRepositoryImpl
-import com.jaiberyepes.mercadolibre.domain.repository.CharactersRepository
+import com.jaiberyepes.mercadolibre.data.RepositoryImpl
+import com.jaiberyepes.mercadolibre.domain.repository.Repository
 import dagger.Binds
 import dagger.Module
 
@@ -20,6 +20,6 @@ abstract class DataModule {
 
     @Binds
     internal abstract fun providesCharactersRepository(
-        charactersRepository: CharactersRepositoryImpl
-    ): CharactersRepository
+        charactersRepository: RepositoryImpl
+    ): Repository
 }

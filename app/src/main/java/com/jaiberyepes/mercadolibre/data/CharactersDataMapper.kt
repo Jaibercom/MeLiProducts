@@ -3,8 +3,11 @@ package com.jaiberyepes.mercadolibre.data
 import com.jaiberyepes.mercadolibre.data.cache.database.entities.CharacterEntity
 import com.jaiberyepes.mercadolibre.data.remote.model.CharacterDetailResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.CharacterResponse
+import com.jaiberyepes.mercadolibre.data.remote.model.search.ProductResponse
+import com.jaiberyepes.mercadolibre.data.remote.model.search.SearchResponse
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterUI
+import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import com.jaiberyepes.mercadolibre.util.BaseMapper
 
 /**
@@ -13,6 +16,21 @@ import com.jaiberyepes.mercadolibre.util.BaseMapper
  * @author jaiber.yepes
  */
 object CharactersDataMapper {
+
+    object ProductsResponseToProductUI : BaseMapper<List<ProductResponse>, List<ProductUI>> {
+
+        override fun map(type: List<ProductResponse>): List<ProductUI> {
+            return type.map {
+                ProductUI(
+                    id = it.id,
+                    title = it.title,
+                    price = it.price,
+                    thumbnail = it.thumbnail
+                )
+            }
+        }
+    }
+
 
     object CharactersListRemoteToUI : BaseMapper<List<CharacterResponse>, List<CharacterUI>> {
 

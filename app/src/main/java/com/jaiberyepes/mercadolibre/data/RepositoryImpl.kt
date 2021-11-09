@@ -1,10 +1,11 @@
 package com.jaiberyepes.mercadolibre.data
 
-import com.jaiberyepes.mercadolibre.data.cache.CharactersCacheDataSource
-import com.jaiberyepes.mercadolibre.data.remote.CharactersRemoteDataSource
-import com.jaiberyepes.mercadolibre.domain.repository.CharactersRepository
+import com.jaiberyepes.mercadolibre.data.cache.CacheDataSource
+import com.jaiberyepes.mercadolibre.data.remote.RemoteDataSource
+import com.jaiberyepes.mercadolibre.domain.repository.Repository
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterUI
+import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import com.jaiberyepes.mercadolibre.util.Output
 import timber.log.Timber
 import javax.inject.Inject
@@ -14,10 +15,21 @@ import javax.inject.Inject
  *
  * @author jaiber.yepes
  */
-class CharactersRepositoryImpl @Inject constructor(
-    private val remoteDataSource: CharactersRemoteDataSource,
-    private val cacheDataSource: CharactersCacheDataSource
-) : CharactersRepository {
+class RepositoryImpl @Inject constructor(
+    private val remoteDataSource: RemoteDataSource,
+    private val cacheDataSource: CacheDataSource
+) : Repository {
+
+    override suspend fun getProductsFromSearch(keyword: String, offset: Int): Output<List<ProductUI>> {
+        Timber.d("getProductsFromSearch")
+        val productsRemote =  remoteDataSource.getProductsFromSearch("MCO", keyword, offset)
+
+        return if (productsRemote is Output.Success) {
+            Output.success(CharactersDataMapper.ProductsResponseToProductUI.map(productsRemote.data))
+        } else {
+            Output.success(emptyList())
+        }
+    }
 
     override suspend fun getCharacters(): Output<List<CharacterUI>> {
         Timber.d("getCharacters")

@@ -9,5 +9,5 @@ import com.squareup.moshi.Json
  */
 data class SearchResponse(
     val paging : PagingResponse? = null,
-    @Json(name = "results") val productList : List<ProductResponse> = emptyList()
+    @Json(name = "results") val results : List<ProductResponse> = emptyList()
 )

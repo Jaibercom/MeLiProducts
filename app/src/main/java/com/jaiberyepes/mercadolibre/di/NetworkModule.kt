@@ -35,7 +35,7 @@ object NetworkModule {
         Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create().asLenient())
             .build()
 
     @Provides

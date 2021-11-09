@@ -2,25 +2,37 @@ package com.jaiberyepes.mercadolibre.data.remote
 
 import com.jaiberyepes.mercadolibre.data.CharactersDataMapper
 import com.jaiberyepes.mercadolibre.data.remote.model.CharacterResponse
+import com.jaiberyepes.mercadolibre.data.remote.model.search.ProductResponse
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
 import com.jaiberyepes.mercadolibre.util.Output
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 /**
  * Characters related remote DataSource.
  *
  * @author jaiber.yepes
  */
-class CharactersRemoteDataSource @Inject constructor(
-    private val breakingBadApi: MeLiApiService
+class RemoteDataSource @Inject constructor(
+    private val apiService: MeLiApiService
 ) {
+
+    suspend fun getProductsFromSearch(countryId: String, keywords: String, offset: Int): Output<List<ProductResponse>> =
+        try {
+            val searchResponse = withContext(Dispatchers.IO) {
+                apiService.getProductsFromSearch(countryId, keywords, offset)
+            }
+
+            Output.success(searchResponse.results)
+        } catch (e: Throwable) {
+            Output.error("Error retrieving the Product list from remote: ${e.message}")
+        }
 
     suspend fun getCharacters(): Output<List<CharacterResponse>> =
         try {
             val charactersResponse = withContext(Dispatchers.IO) {
-                breakingBadApi.getCharacters()
+                apiService.getCharacters()
             }
 
 //            val characters = CharactersDataMapper.CharactersListRemoteToUI.map(charactersResponse)
@@ -32,7 +44,7 @@ class CharactersRemoteDataSource @Inject constructor(
     suspend fun getCharacterDetails(id: Int): Output<CharacterDetailsUI> =
         try {
             val characterResponse = withContext(Dispatchers.IO) {
-                breakingBadApi.getCharacterDetails(id)
+                apiService.getCharacterDetails(id)
             }
 
             val characters = CharactersDataMapper.CharacterDetailsListRemoteToUI.map(characterResponse)
