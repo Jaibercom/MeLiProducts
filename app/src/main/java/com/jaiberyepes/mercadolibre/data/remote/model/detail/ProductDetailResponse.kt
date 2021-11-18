@@ -1,4 +1,4 @@
-package com.jaiberyepes.mercadolibre.data.remote.model.search
+package com.jaiberyepes.mercadolibre.data.remote.model.detail
 
 import com.squareup.moshi.Json
 
@@ -7,7 +7,7 @@ import com.squareup.moshi.Json
  *
  * @author jaiber.yepes
  */
-class ProductResponse(
+class ProductDetailResponse(
 
     @field:Json(name = "id") val id: String,
     @field:Json(name = "title") val title: String,

@@ -1,10 +1,13 @@
-package com.jaiberyepes.mercadolibre.data
+package com.jaiberyepes.mercadolibre.data.repository
 
+import com.jaiberyepes.mercadolibre.data.CharactersDataMapper
 import com.jaiberyepes.mercadolibre.data.cache.CacheDataSource
 import com.jaiberyepes.mercadolibre.data.remote.RemoteDataSource
 import com.jaiberyepes.mercadolibre.domain.repository.Repository
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterUI
+import com.jaiberyepes.mercadolibre.presentation.model.ProductDescriptionUI
+import com.jaiberyepes.mercadolibre.presentation.model.ProductDetailUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import com.jaiberyepes.mercadolibre.util.Output
 import timber.log.Timber
@@ -30,6 +33,18 @@ class RepositoryImpl @Inject constructor(
             Output.success(emptyList())
         }
     }
+
+    override suspend fun getProductDetail(id: String): Output<ProductDetailUI> {
+        Timber.d("getProductDetail")
+        val productDetail =  remoteDataSource.getProductDetail(id)
+
+        return if (productDetail is Output.Success) {
+            Output.success(CharactersDataMapper.ProductDetailResponseToProductDetailUI.map(productDetail.data))
+        } else {
+            Output.success(ProductDetailUI())
+        }
+    }
+
 
     override suspend fun getCharacters(): Output<List<CharacterUI>> {
         Timber.d("getCharacters")

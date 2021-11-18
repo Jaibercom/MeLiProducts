@@ -2,8 +2,7 @@ package com.jaiberyepes.mercadolibre.presentation.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.jaiberyepes.mercadolibre.domain.repository.Repository
-import com.jaiberyepes.mercadolibre.domain.usescases.CharactersUseCases
+import com.jaiberyepes.mercadolibre.domain.usescases.UseCases
 import javax.inject.Inject
 
 /**
@@ -13,7 +12,7 @@ import javax.inject.Inject
  * @author jaiber.yepes
  */
 class SearchViewModelFactory @Inject constructor(
-        private val useCases: CharactersUseCases
+        private val useCases: UseCases
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

@@ -1,6 +1,6 @@
 package com.jaiberyepes.mercadolibre.di
 
-import com.jaiberyepes.mercadolibre.data.RepositoryImpl
+import com.jaiberyepes.mercadolibre.data.repository.RepositoryImpl
 import com.jaiberyepes.mercadolibre.domain.repository.Repository
 import dagger.Binds
 import dagger.Module

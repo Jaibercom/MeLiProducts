@@ -2,7 +2,7 @@ package com.jaiberyepes.mercadolibre.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.jaiberyepes.mercadolibre.domain.usescases.CharactersUseCases
+import com.jaiberyepes.mercadolibre.domain.usescases.UseCases
 import javax.inject.Inject
 
 /**
@@ -12,7 +12,7 @@ import javax.inject.Inject
  * @author jaiber.yepes
  */
 class CharactersViewModelFactory @Inject constructor(
-        private val charactersUseCases: CharactersUseCases
+        private val charactersUseCases: UseCases
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

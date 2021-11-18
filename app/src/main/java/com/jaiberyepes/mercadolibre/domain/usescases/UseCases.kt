@@ -7,8 +7,9 @@ import javax.inject.Inject
  *
  * @author jaiber.yepes
  */
-data class CharactersUseCases @Inject constructor(
-    val GetProductsFromSearch: GetProductsFromSearch,
+data class UseCases @Inject constructor(
+    val getProductsFromSearch: GetProductsFromSearch,
+    val getProductDetail: GetProductDetail,
     val getCharacters: GetCharacters,
     val getCharacterDetails: GetCharacterDetails,
     val updateCharacter: UpdateCharacter

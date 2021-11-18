@@ -8,10 +8,10 @@ import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.jaiberyepes.mercadolibre.R
 import com.jaiberyepes.mercadolibre.presentation.adapter.ProductsController
 import com.jaiberyepes.mercadolibre.util.extensions.setRoundCorners
+import com.jaiberyepes.mercadolibre.util.formatMeliImgUrl
 import com.jaiberyepes.mercadolibre.util.getCurrencyFormat
 
 /**
@@ -30,11 +30,11 @@ abstract class ProductModel : EpoxyModelWithHolder<ProductModel.CharactersHolder
 
     override fun bind(holder: CharactersHolder) = with(holder) {
         titleView.text = productUI.title.trimStart()
-        priceView.text = productUI.price?.let { getCurrencyFormat(it) }
+        priceView.text = getCurrencyFormat(productUI.price)
 
         Glide.with(imageView)
-            .load(productUI.thumbnail)
-            .apply(RequestOptions().placeholder(R.color.grayLight))
+            .load(productUI.formatMeliImgUrl())
+//            .apply(RequestOptions().placeholder(R.color.grayLight))
             .into(holder.imageView)
         imageView.setRoundCorners(R.dimen.margin_x_small)
 

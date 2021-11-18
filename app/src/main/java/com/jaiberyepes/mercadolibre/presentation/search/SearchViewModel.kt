@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jaiberyepes.mercadolibre.R
-import com.jaiberyepes.mercadolibre.domain.usescases.CharactersUseCases
+import com.jaiberyepes.mercadolibre.domain.usescases.UseCases
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import com.jaiberyepes.mercadolibre.util.Output
 import com.jaiberyepes.mercadolibre.util.base.NavigationProvider
@@ -20,7 +20,7 @@ import timber.log.Timber
  * @author jaiber.yepes
  */
 class SearchViewModel @Inject constructor(
-    private val useCases: CharactersUseCases
+    private val useCases: UseCases
 ) : ViewModel(), NavigationProvider<SearchViewModel.ProductsView> {
 
     // Current view LiveData
@@ -33,6 +33,8 @@ class SearchViewModel @Inject constructor(
 
     private var products: List<ProductUI> = listOf()
 
+//    private var productSelected: ProductUI = listOf()
+
     override fun navigateTo(destinationView: ProductsView) {
         currentView.value = destinationView
     }
@@ -43,7 +45,7 @@ class SearchViewModel @Inject constructor(
 
         viewModelScope.launch {
             currentUIState.value = UIState.Loading()
-            val output = useCases.GetProductsFromSearch(keyword, offset = 0)
+            val output = useCases.getProductsFromSearch(keyword, offset = 0)
             if (output is Output.Success) {
                 products = output.data
                 Timber.d("Products: $products")
@@ -54,14 +56,18 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    fun setDetailScreen(product: ProductUI){
+        currentUIState.value = UIState.Data(ProductsDataType.ProductDetailData(product))
+    }
+
     sealed class ProductsView {
         object SearchFragment : ProductsView()
-        data class SearchDetailFragment(val id: String) : ProductsView()
+        data class SearchDetailFragment(val product: ProductUI) : ProductsView()
     }
 
     sealed class ProductsDataType {
         data class Products(val characters: List<ProductUI>) : ProductsDataType()
-//        data class CharacterDetailsData(val charactersDetails: CharacterDetailsUI) : ProductsDataType()
+        data class ProductDetailData(val productDetail: ProductUI) : ProductsDataType()
     }
 
 }

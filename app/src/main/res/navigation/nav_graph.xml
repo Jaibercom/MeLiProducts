@@ -9,7 +9,29 @@
         android:id="@+id/searchFragment"
         android:name="com.jaiberyepes.mercadolibre.presentation.search.SearchFragment"
         android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_searchFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/fade_out"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.jaiberyepes.mercadolibre.presentation.detail.ProductDetailFragment"
+        android:label="ProductDetailFragment"
+        tools:layout="@layout/fragment_product_detail">
+
+        <argument
+            android:name="product"
+            app:argType="com.jaiberyepes.mercadolibre.presentation.model.ProductUI" />
+        />
+    </fragment>
 
     <fragment
         android:id="@+id/charactersFragment"
@@ -23,7 +45,7 @@
             app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_from_left"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
@@ -38,7 +60,7 @@
             app:enterAnim="@anim/slide_in_from_left"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_from_right"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
 
         <argument
             android:name="character"

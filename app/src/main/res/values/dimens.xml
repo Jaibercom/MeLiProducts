@@ -34,5 +34,6 @@
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="icon_list_size">100dp</dimen>
+    <dimen name="detail_image_height">220dp</dimen>
 
 </resources>

@@ -9,6 +9,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.jaiberyepes.mercadolibre.R
+import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
+import com.jaiberyepes.mercadolibre.presentation.search.SearchFragmentDirections
+import com.jaiberyepes.mercadolibre.presentation.search.SearchViewModel
+import com.jaiberyepes.mercadolibre.presentation.search.SearchViewModelFactory
 import com.jaiberyepes.mercadolibre.presentation.viewmodel.CharactersViewModel
 import com.jaiberyepes.mercadolibre.presentation.viewmodel.CharactersViewModel.CharactersView
 import com.jaiberyepes.mercadolibre.presentation.viewmodel.CharactersViewModelFactory
@@ -29,6 +33,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     @Inject
     lateinit var charactersViewModelFactory: CharactersViewModelFactory
     private lateinit var charactersViewModel: CharactersViewModel
+
+    @Inject
+    lateinit var searchViewModelFactory: SearchViewModelFactory
+    private lateinit var searchViewModel: SearchViewModel
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -54,7 +62,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         // ViewModel
         charactersViewModel = ViewModelProvider(this, charactersViewModelFactory)[CharactersViewModel::class.java]
+        searchViewModel = ViewModelProvider(this, searchViewModelFactory)[SearchViewModel::class.java]
         observe(charactersViewModel.currentViewLiveData, ::onCharactersViewChange)
+        observe(searchViewModel.currentViewLiveData, ::onViewChange)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -79,6 +89,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
+    private fun onViewChange(destination: SearchViewModel.ProductsView) {
+        Timber.d("onCharactersViewChange")
+        when (destination) {
+            is SearchViewModel.ProductsView.SearchDetailFragment -> showDetailFragment(destination.product)
+            else -> {}
+        }
+    }
+
     private fun showCharactersFragment() {
         Timber.d("showCharactersFragment")
         navController.navigate(R.id.charactersFragment)
@@ -87,6 +105,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun showCharacterDetailsFragment(id: Int) {
         Timber.d("showCharacterDetailsFragment")
         val action = CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailsFragment(id)
+        navController.navigate(action)
+    }
+
+    private fun showDetailFragment(product: ProductUI) {
+        Timber.d("showDetailFragment")
+        val action = SearchFragmentDirections.actionSearchFragmentToProductDetailFragment(product)
         navController.navigate(action)
     }
 }

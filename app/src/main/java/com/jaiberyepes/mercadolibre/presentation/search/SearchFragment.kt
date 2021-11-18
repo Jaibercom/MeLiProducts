@@ -20,8 +20,8 @@ import com.jaiberyepes.mercadolibre.util.extensions.observe
 import com.jaiberyepes.mercadolibre.util.extensions.visible
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.search_fragment.searchEpoxyRecyclerView
-import kotlinx.android.synthetic.main.search_fragment.search_view
+import kotlinx.android.synthetic.main.fragment_search.searchEpoxyRecyclerView
+import kotlinx.android.synthetic.main.fragment_search.search_view
 import timber.log.Timber
 
 /**
@@ -29,7 +29,7 @@ import timber.log.Timber
  *
  * @author jaiber.yepes
  */
-class SearchFragment : Fragment(R.layout.search_fragment), ProductsController.ClickedListener {
+class SearchFragment : Fragment(R.layout.fragment_search), ProductsController.ClickedListener {
 
     // ViewModel
     @Inject
@@ -68,7 +68,7 @@ class SearchFragment : Fragment(R.layout.search_fragment), ProductsController.Cl
         super.onCreate(savedInstanceState)
 
         // ViewModel
-        viewModel = ViewModelProvider(this, searchViewModelFactory)[SearchViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity(), searchViewModelFactory)[SearchViewModel::class.java]
 
     }
 
@@ -91,16 +91,6 @@ class SearchFragment : Fragment(R.layout.search_fragment), ProductsController.Cl
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
-    }
-
-    override fun onProductClicked(productUI: ProductUI) {
-        Timber.d("onCharacterClicked")
-        hideKeyboard()
-        viewModel.navigateTo(
-            SearchViewModel.ProductsView.SearchDetailFragment(
-                productUI.id
-            )
-        )
     }
 
     private fun setupCharactersRecyclerView() = searchEpoxyRecyclerView.apply {
@@ -155,5 +145,14 @@ class SearchFragment : Fragment(R.layout.search_fragment), ProductsController.Cl
 
         charactersController.setData(listOf())
         noResultsInflated?.visible()
+    }
+
+    override fun onProductClicked(product: ProductUI) {
+        Timber.d("onProductClicked")
+        hideKeyboard()
+//        viewModel.s
+        viewModel.navigateTo(
+            SearchViewModel.ProductsView.SearchDetailFragment(product)
+        )
     }
 }

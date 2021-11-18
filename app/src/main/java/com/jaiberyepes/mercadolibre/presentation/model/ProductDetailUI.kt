@@ -4,15 +4,13 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 /**
- * Data class for Character UI entity.
+ * Data class for Product Detail.
  *
  * @author jaiber.yepes
  */
 @Parcelize
-data class ProductUI(
-    val id: String,
-    val title: String,
+data class ProductDetailUI(
+    val title: String = "",
     val price: Double = 0.0,
-    val thumbnail: String?,
-    val imgId: String = ""
+    val isFavorite: Boolean = false
 ) : Parcelable

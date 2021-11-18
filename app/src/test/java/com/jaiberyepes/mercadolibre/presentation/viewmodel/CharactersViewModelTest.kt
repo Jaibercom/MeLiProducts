@@ -1,7 +1,7 @@
 package com.jaiberyepes.mercadolibre.presentation.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.jaiberyepes.mercadolibre.domain.usescases.CharactersUseCases
+import com.jaiberyepes.mercadolibre.domain.usescases.UseCases
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterUI
 import com.jaiberyepes.mercadolibre.util.Output
@@ -33,7 +33,7 @@ class CharactersViewModelTest {
     var instantExecutorRule = InstantTaskExecutorRule()
 
     @MockK
-    lateinit var charactersUseCases: CharactersUseCases
+    lateinit var charactersUseCases: UseCases
 
     private lateinit var charactersViewModel: CharactersViewModel
 

@@ -2,6 +2,8 @@ package com.jaiberyepes.mercadolibre.data.remote
 
 import com.jaiberyepes.mercadolibre.data.remote.model.CharacterDetailResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.CharacterResponse
+import com.jaiberyepes.mercadolibre.data.remote.model.detail.ProductDescriptionResponse
+import com.jaiberyepes.mercadolibre.data.remote.model.detail.ProductDetailResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.search.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,5 +28,11 @@ interface MeLiApiService {
         @Query("q") word: String,
         @Query("offset") offset: Int = 0
     ): SearchResponse
+
+    @GET("items/{id}")
+    suspend fun getProductDetail(@Path("id") id: String): ProductDetailResponse
+
+    @GET("items/{id}/description")
+    suspend fun getProductDescription(@Path("id") id: String): ProductDescriptionResponse
 
 }

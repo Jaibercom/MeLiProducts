@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jaiberyepes.mercadolibre.R
-import com.jaiberyepes.mercadolibre.domain.usescases.CharactersUseCases
+import com.jaiberyepes.mercadolibre.domain.usescases.UseCases
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterUI
 import com.jaiberyepes.mercadolibre.util.Output
@@ -21,7 +21,7 @@ import javax.inject.Inject
  * @author jaiber.yepes
  */
 class CharactersViewModel @Inject constructor(
-    private val charactersUseCases: CharactersUseCases
+    private val charactersUseCases: UseCases
 ) : ViewModel(), NavigationProvider<CharactersViewModel.CharactersView> {
 
     // Current view LiveData
