@@ -6,7 +6,7 @@ import com.jaiberyepes.mercadolibre.domain.usescases.UseCases
 import javax.inject.Inject
 
 /**
- * ViewModel provider factory to instantiate [ProductsViewModel].
+ * ViewModel provider factory to instantiate [DetailViewModel].
  * Required given CharactersViewModel has a non-empty constructor.
  *
  * @author jaiber.yepes

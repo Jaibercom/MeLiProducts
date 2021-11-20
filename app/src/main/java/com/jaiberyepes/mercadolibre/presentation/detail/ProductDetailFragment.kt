@@ -73,19 +73,8 @@ class ProductDetailFragment : Fragment() {
 
         loadingViewStub = view.findViewById(R.id.detailLoadingViewStub)
 
-//        characterFavorite.setOnClickListener {
-//            onCharacterFavoriteClicked()
-//        }
-
         observe(mviewModel.currentUIStateLiveData, ::onUIStateChange)
-//        viewModel.getCharacterDetails(characterId)
     }
-//
-//    private fun onCharacterFavoriteClicked() {
-//        Timber.d("onCharacterFavoriteClicked")
-////        viewModel.updateFavorite()
-//        viewModel.navigateTo(CharactersViewModel.CharactersView.CharactersFragment)
-//    }
 
     override fun onResume() {
         super.onResume()
@@ -130,13 +119,6 @@ class ProductDetailFragment : Fragment() {
             .into(binding.imageView)
 
         binding.imageView.setRoundCorners(R.dimen.margin_x_small)
-//
-//        if (product.isFavorite) {
-//            characterFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
-//        } else {
-//            characterFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-//        }
-//        characterFavorite.visible()
     }
 
     private fun showProductDescription(product: ProductDescriptionUI) {

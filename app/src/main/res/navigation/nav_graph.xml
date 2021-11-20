@@ -17,7 +17,7 @@
             app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_from_left"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
 
     </fragment>
 
@@ -25,48 +25,13 @@
         android:id="@+id/productDetailFragment"
         android:name="com.jaiberyepes.mercadolibre.presentation.detail.ProductDetailFragment"
         android:label="ProductDetailFragment"
-        tools:layout="@layout/fragment_product_detail">
+        tools:layout="@layout/fragment_product_detail"
+        tools:ignore="ExtraText">
 
         <argument
             android:name="product"
             app:argType="com.jaiberyepes.mercadolibre.presentation.model.ProductUI" />
         />
     </fragment>
-
-    <fragment
-        android:id="@+id/charactersFragment"
-        android:name="com.jaiberyepes.mercadolibre.presentation.CharactersFragment"
-        android:label="characters_fragment"
-        tools:layout="@layout/fragment_characters">
-
-        <action
-            android:id="@+id/action_charactersFragment_to_characterDetailsFragment"
-            app:destination="@id/characterDetailsFragment"
-            app:enterAnim="@anim/slide_in_from_right"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/slide_in_from_left"
-            app:popExitAnim="@anim/fade_out" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/characterDetailsFragment"
-        android:name="com.jaiberyepes.mercadolibre.presentation.CharacterDetailsFragment"
-        android:label="fragment_character_details"
-        tools:layout="@layout/fragment_character_details">
-
-        <action
-            android:id="@+id/action_characterDetailsFragment_to_charactersFragment"
-            app:destination="@id/charactersFragment"
-            app:enterAnim="@anim/slide_in_from_left"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/slide_in_from_right"
-            app:popExitAnim="@anim/fade_out" />
-
-        <argument
-            android:name="character"
-            app:argType="integer" />
-
-    </fragment>
-
 
 </navigation>

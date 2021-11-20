@@ -1,7 +1,5 @@
 package com.jaiberyepes.mercadolibre.data.remote
 
-import com.jaiberyepes.mercadolibre.data.remote.model.CharacterDetailResponse
-import com.jaiberyepes.mercadolibre.data.remote.model.CharacterResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.detail.ProductDescriptionResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.detail.ProductDetailResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.search.SearchResponse
@@ -15,12 +13,6 @@ import retrofit2.http.Query
  * @author jaiber.yepes
  */
 interface MeLiApiService {
-
-    @GET("characters")
-    suspend fun getCharacters(): List<CharacterResponse>
-
-    @GET("characters/{id}")
-    suspend fun getCharacterDetails(@Path("id") id: Int): List<CharacterDetailResponse>
 
     @GET("sites/{countryId}/search")
     suspend fun getProductsFromSearch(

@@ -1,7 +1,5 @@
 package com.jaiberyepes.mercadolibre.domain.repository
 
-import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
-import com.jaiberyepes.mercadolibre.presentation.model.CharacterUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductDescriptionUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductDetailUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
@@ -20,9 +18,4 @@ interface Repository {
 
     suspend fun getProductDescription(id: String): Output<ProductDescriptionUI>
 
-    suspend fun getCharacters(): Output<List<CharacterUI>>
-
-    suspend fun updateCharacter(characterUI: CharacterDetailsUI)
-
-    suspend fun getCharacterDetails(id: Int): Output<CharacterDetailsUI>
 }
