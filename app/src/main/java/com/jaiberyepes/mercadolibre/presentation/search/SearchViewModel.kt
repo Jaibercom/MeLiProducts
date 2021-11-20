@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jaiberyepes.mercadolibre.R
 import com.jaiberyepes.mercadolibre.domain.usescases.UseCases
+import com.jaiberyepes.mercadolibre.presentation.detail.DetailViewModel
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import com.jaiberyepes.mercadolibre.util.Output
 import com.jaiberyepes.mercadolibre.util.base.NavigationProvider

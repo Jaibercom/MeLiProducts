@@ -1,7 +1,7 @@
 package com.jaiberyepes.mercadolibre.presentation.model
 
 data class ProductDescriptionUI(
-    val text: String = "",
-    val last_updated: String = "",
-    val date_created: String = ""
+    val description: String = "",
+    val lastUpdated: String = "",
+    val dateCreated: String = ""
 )

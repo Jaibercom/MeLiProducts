@@ -14,9 +14,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.jaiberyepes.mercadolibre.R
 import com.jaiberyepes.mercadolibre.databinding.ProductDetailFragmentBinding
-import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
-import com.jaiberyepes.mercadolibre.presentation.search.SearchViewModel
-import com.jaiberyepes.mercadolibre.presentation.search.SearchViewModelFactory
+import com.jaiberyepes.mercadolibre.presentation.model.ProductDescriptionUI
+import com.jaiberyepes.mercadolibre.presentation.model.ProductDetailUI
 import com.jaiberyepes.mercadolibre.util.base.UIState
 import com.jaiberyepes.mercadolibre.util.extensions.gone
 import com.jaiberyepes.mercadolibre.util.extensions.observe
@@ -37,16 +36,13 @@ class ProductDetailFragment : Fragment() {
 
     // ViewModel
     @Inject
-    lateinit var viewModelFactory: SearchViewModelFactory
-    private lateinit var viewModel: SearchViewModel
+    lateinit var mviewModelFactory: DetailViewModelFactory
+    private lateinit var mviewModel: DetailViewModel
 
     private lateinit var binding: ProductDetailFragmentBinding
 
     // Navigation
     private val args: ProductDetailFragmentArgs by navArgs()
-    private val product: ProductUI by lazy {
-        args.product
-    }
 
     // Loading
     private lateinit var loadingViewStub: ViewStub
@@ -61,7 +57,7 @@ class ProductDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         // ViewModel
-        ViewModelProvider(requireActivity(), viewModelFactory)[SearchViewModel::class.java].also { viewModel = it }
+        ViewModelProvider(this, mviewModelFactory)[DetailViewModel::class.java].also { mviewModel = it }
     }
 
     override fun onCreateView(
@@ -81,7 +77,7 @@ class ProductDetailFragment : Fragment() {
 //            onCharacterFavoriteClicked()
 //        }
 
-        observe(viewModel.currentUIStateLiveData, ::onUIStateChange)
+        observe(mviewModel.currentUIStateLiveData, ::onUIStateChange)
 //        viewModel.getCharacterDetails(characterId)
     }
 //
@@ -93,10 +89,10 @@ class ProductDetailFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.setDetailScreen(product)
+        mviewModel.setProduct(args.product)
     }
 
-    private fun onUIStateChange(uiState: UIState<SearchViewModel.ProductsDataType>) =
+    private fun onUIStateChange(uiState: UIState<DetailViewModel.ProductDataType>) =
         when (uiState) {
             is UIState.Loading -> showLoading()
             is UIState.Data -> showData(uiState.data)
@@ -112,27 +108,28 @@ class ProductDetailFragment : Fragment() {
         loadingInflated?.visible()
     }
 
-    private fun showData(dataType: SearchViewModel.ProductsDataType) {
+    private fun showData(dataType: DetailViewModel.ProductDataType) {
         Timber.d("showData")
 
         loadingInflated?.gone()
         when (dataType) {
-            is SearchViewModel.ProductsDataType.ProductDetailData -> showProductDetail(dataType.productDetail)
+            is DetailViewModel.ProductDataType.ProductDetailData -> showProductDetail(dataType.productDetail)
+            is DetailViewModel.ProductDataType.ProductDescriptionData -> showProductDescription(dataType.productDescription)
         }
     }
 
-    private fun showProductDetail(product: ProductUI) {
+    private fun showProductDetail(product: ProductDetailUI) {
         Timber.d("showProductDetail: $product")
 
-        binding.titleTextView.text = product.title
-        binding.priceTextView.text = getCurrencyFormat(product.price)
+        binding.titleView.text = product.title
+        binding.priceView.text = getCurrencyFormat(product.price)
 
         Glide.with(this)
             .load(product.formatMeliImgUrl())
             .apply(RequestOptions().placeholder(R.color.grayLight))
-            .into(binding.pictureImageView)
+            .into(binding.imageView)
 
-        binding.pictureImageView.setRoundCorners(R.dimen.margin_x_small)
+        binding.imageView.setRoundCorners(R.dimen.margin_x_small)
 //
 //        if (product.isFavorite) {
 //            characterFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
@@ -140,6 +137,12 @@ class ProductDetailFragment : Fragment() {
 //            characterFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
 //        }
 //        characterFavorite.visible()
+    }
+
+    private fun showProductDescription(product: ProductDescriptionUI) {
+        Timber.d("showProductDetail: $product")
+
+        binding.descriptionView.text = product.description
     }
 
     private fun showError(@StringRes messageResId: Int) {

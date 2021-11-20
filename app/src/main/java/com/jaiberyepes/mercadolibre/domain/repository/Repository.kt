@@ -18,7 +18,7 @@ interface Repository {
 
     suspend fun getProductDetail(id: String): Output<ProductDetailUI>
 
-//    suspend fun getProductDetailDescription(id: String): Output<List<ProductDescriptionUI>>
+    suspend fun getProductDescription(id: String): Output<ProductDescriptionUI>
 
     suspend fun getCharacters(): Output<List<CharacterUI>>
 

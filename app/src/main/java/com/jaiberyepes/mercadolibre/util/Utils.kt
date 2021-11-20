@@ -1,5 +1,6 @@
 package com.jaiberyepes.mercadolibre.util
 
+import com.jaiberyepes.mercadolibre.presentation.model.ProductDetailUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import java.text.NumberFormat
 
@@ -11,5 +12,9 @@ fun getCurrencyFormat(price: Double): String {
 }
 
 fun ProductUI.formatMeliImgUrl(): String {
+    return "https://http2.mlstatic.com/D_${this.imgId}-O.jpg"
+}
+
+fun ProductDetailUI.formatMeliImgUrl(): String {
     return "https://http2.mlstatic.com/D_${this.imgId}-O.jpg"
 }

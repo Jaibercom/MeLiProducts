@@ -45,6 +45,17 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getProductDescription(id: String): Output<ProductDescriptionUI> {
+        Timber.d("getProductDetail")
+        val productDescription =  remoteDataSource.getProductDescriptionResponse(id)
+
+        return if (productDescription is Output.Success) {
+            Output.success(CharactersDataMapper.ProductDescriptionResponseToProductDescriptionUI.map(productDescription.data))
+        } else {
+            Output.success(ProductDescriptionUI())
+        }
+    }
+
 
     override suspend fun getCharacters(): Output<List<CharacterUI>> {
         Timber.d("getCharacters")

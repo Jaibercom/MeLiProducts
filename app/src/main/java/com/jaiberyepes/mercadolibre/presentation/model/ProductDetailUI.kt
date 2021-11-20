@@ -12,5 +12,6 @@ import kotlinx.android.parcel.Parcelize
 data class ProductDetailUI(
     val title: String = "",
     val price: Double = 0.0,
+    val imgId: String = "",
     val isFavorite: Boolean = false
 ) : Parcelable

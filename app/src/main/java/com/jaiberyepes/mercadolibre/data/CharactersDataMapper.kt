@@ -3,11 +3,13 @@ package com.jaiberyepes.mercadolibre.data
 import com.jaiberyepes.mercadolibre.data.cache.database.entities.CharacterEntity
 import com.jaiberyepes.mercadolibre.data.remote.model.CharacterDetailResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.CharacterResponse
+import com.jaiberyepes.mercadolibre.data.remote.model.detail.ProductDescriptionResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.detail.ProductDetailResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.search.ProductResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.search.SearchResponse
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterUI
+import com.jaiberyepes.mercadolibre.presentation.model.ProductDescriptionUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductDetailUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import com.jaiberyepes.mercadolibre.util.BaseMapper
@@ -40,7 +42,21 @@ object CharactersDataMapper {
             return with(type) {
                 ProductDetailUI(
                     title = title,
-                    price = price
+                    price = price,
+                    imgId = imgId
+                )
+            }
+        }
+    }
+
+    object ProductDescriptionResponseToProductDescriptionUI : BaseMapper<ProductDescriptionResponse, ProductDescriptionUI> {
+
+        override fun map(type: ProductDescriptionResponse): ProductDescriptionUI {
+            return with(type) {
+                ProductDescriptionUI(
+                    description = plain_text,
+                    lastUpdated = last_updated,
+                    dateCreated = date_created
                 )
             }
         }

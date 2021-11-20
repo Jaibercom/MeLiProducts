@@ -2,6 +2,7 @@ package com.jaiberyepes.mercadolibre.data.remote
 
 import com.jaiberyepes.mercadolibre.data.CharactersDataMapper
 import com.jaiberyepes.mercadolibre.data.remote.model.CharacterResponse
+import com.jaiberyepes.mercadolibre.data.remote.model.detail.ProductDescriptionResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.detail.ProductDetailResponse
 import com.jaiberyepes.mercadolibre.data.remote.model.search.ProductResponse
 import com.jaiberyepes.mercadolibre.presentation.model.CharacterDetailsUI
@@ -36,8 +37,20 @@ class RemoteDataSource @Inject constructor(
             }
             Output.success(responseDetail)
         } catch (e: Throwable) {
-            Output.error("Error retrieving the Product list from remote: ${e.message}")
+            Output.error("Error retrieving the Product Detail from remote: ${e.message}")
         }
+
+    suspend fun getProductDescriptionResponse(id: String): Output<ProductDescriptionResponse> =
+        try {
+            val responseDescription = withContext(Dispatchers.IO) {
+                apiService.getProductDescription(id)
+            }
+            Output.success(responseDescription)
+        } catch (e: Throwable) {
+            Output.error("Error retrieving the Product description from remote: ${e.message}")
+        }
+
+
 
 
     suspend fun getCharacters(): Output<List<CharacterResponse>> =
