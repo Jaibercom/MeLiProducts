@@ -1,4 +1,4 @@
-package com.jaiberyepes.mercadolibre.presentation.search
+package com.jaiberyepes.mercadolibre.presentation.ui.search
 
 import android.content.Context
 import android.os.Bundle

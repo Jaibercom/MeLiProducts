@@ -12,7 +12,7 @@ fun getCurrencyFormat(price: Double): String {
 }
 
 fun ProductUI.formatMeliImgUrl(): String {
-    return "https://http2.mlstatic.com/D_${this.imgId}-O.jpg"
+    return "https://http2.mlstatic.com/D_${this.imgId}-I.jpg"
 }
 
 fun ProductDetailUI.formatMeliImgUrl(): String {

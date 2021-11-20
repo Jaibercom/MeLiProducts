@@ -1,7 +1,7 @@
 package com.jaiberyepes.mercadolibre.di
 
-import com.jaiberyepes.mercadolibre.presentation.detail.ProductDetailFragment
-import com.jaiberyepes.mercadolibre.presentation.search.SearchFragment
+import com.jaiberyepes.mercadolibre.presentation.ui.detail.ProductDetailFragment
+import com.jaiberyepes.mercadolibre.presentation.ui.search.SearchFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.jaiberyepes.mercadolibre.presentation.search.SearchFragment"
-        android:label="search_fragment"
+        android:name="com.jaiberyepes.mercadolibre.presentation.ui.search.SearchFragment"
+        android:label="@string/meli"
         tools:layout="@layout/fragment_search">
 
         <action
@@ -23,8 +23,8 @@
 
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.jaiberyepes.mercadolibre.presentation.detail.ProductDetailFragment"
-        android:label="ProductDetailFragment"
+        android:name="com.jaiberyepes.mercadolibre.presentation.ui.detail.ProductDetailFragment"
+        android:label="@string/meli"
         tools:layout="@layout/fragment_product_detail"
         tools:ignore="ExtraText">
 

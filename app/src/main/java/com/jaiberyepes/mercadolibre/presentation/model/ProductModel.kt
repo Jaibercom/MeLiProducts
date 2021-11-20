@@ -34,15 +34,8 @@ abstract class ProductModel : EpoxyModelWithHolder<ProductModel.CharactersHolder
 
         Glide.with(imageView)
             .load(productUI.formatMeliImgUrl())
-//            .apply(RequestOptions().placeholder(R.color.grayLight))
             .into(holder.imageView)
         imageView.setRoundCorners(R.dimen.margin_x_small)
-
-//        if (productUI.isFavorite) {
-//            favoriteView.setImageResource(R.drawable.ic_baseline_favorite_24)
-//        } else {
-//            favoriteView.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-//        }
 
         container.setOnClickListener {
             clickedListener.onProductClicked(productUI)
@@ -53,14 +46,12 @@ abstract class ProductModel : EpoxyModelWithHolder<ProductModel.CharactersHolder
         lateinit var titleView: TextView
         lateinit var priceView: TextView
         lateinit var imageView: ImageView
-        lateinit var favoriteView: ImageView
         lateinit var container: View
 
         override fun bindView(itemView: View) {
             imageView = itemView.findViewById(R.id.item_image)
             titleView = itemView.findViewById(R.id.item_title)
             priceView = itemView.findViewById(R.id.item_price)
-//            favoriteView = itemView.findViewById(R.id.item_favorite)
             container = itemView
         }
     }

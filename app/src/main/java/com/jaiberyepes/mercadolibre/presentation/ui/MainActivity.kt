@@ -1,4 +1,4 @@
-package com.jaiberyepes.mercadolibre.presentation
+package com.jaiberyepes.mercadolibre.presentation.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +7,12 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.jaiberyepes.mercadolibre.R
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
-import com.jaiberyepes.mercadolibre.presentation.search.SearchFragmentDirections
-import com.jaiberyepes.mercadolibre.presentation.search.SearchViewModel
-import com.jaiberyepes.mercadolibre.presentation.search.SearchViewModelFactory
+import com.jaiberyepes.mercadolibre.presentation.ui.search.SearchFragmentDirections
+import com.jaiberyepes.mercadolibre.presentation.ui.search.SearchViewModel
+import com.jaiberyepes.mercadolibre.presentation.ui.search.SearchViewModelFactory
 import com.jaiberyepes.mercadolibre.util.extensions.observe
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -25,11 +26,6 @@ import timber.log.Timber
  */
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    // ViewModel
-//    @Inject
-//    lateinit var charactersViewModelFactory: CharactersViewModelFactory
-//    private lateinit var charactersViewModel: CharactersViewModel
-
     @Inject
     lateinit var searchViewModelFactory: SearchViewModelFactory
     private lateinit var searchViewModel: SearchViewModel
@@ -41,25 +37,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         findNavController(R.id.navHostFragment)
     }
 
-    private val onDestinationChangedListener = NavController.OnDestinationChangedListener { _, destination, _ ->
-        when (destination.id) {
-//            R.id.characterDetailsFragment -> {
-//                toolbar.title = getText(R.string.character_details)
-//            }
-            else -> {
-                toolbar.title = getText(R.string.meli)
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
+        toolbar.title = getText(R.string.meli)
         // ViewModel
-//        charactersViewModel = ViewModelProvider(this, charactersViewModelFactory)[CharactersViewModel::class.java]
         searchViewModel = ViewModelProvider(this, searchViewModelFactory)[SearchViewModel::class.java]
-//        observe(charactersViewModel.currentViewLiveData, ::onCharactersViewChange)
         observe(searchViewModel.currentViewLiveData, ::onViewChange)
     }
 
@@ -68,22 +52,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         setSupportActionBar(toolbar)
 
-//        appBarConfiguration = AppBarConfiguration(setOf(R.id.charactersFragment))
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navController.addOnDestinationChangedListener(onDestinationChangedListener)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.searchFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-//    private fun onCharactersViewChange(destination: CharactersView) {
-//        Timber.d("onCharactersViewChange")
-//        when (destination) {
-//            is CharactersView.CharactersFragment -> showCharactersFragment()
-//            is CharactersView.CharacterDetailsFragment -> showCharacterDetailsFragment(destination.id)
-//        }
-//    }
 
     private fun onViewChange(destination: SearchViewModel.ProductsView) {
         Timber.d("onCharactersViewChange")
@@ -92,17 +68,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             else -> {}
         }
     }
-
-//    private fun showCharactersFragment() {
-//        Timber.d("showCharactersFragment")
-//        navController.navigate(R.id.charactersFragment)
-//    }
-//
-//    private fun showCharacterDetailsFragment(id: Int) {
-//        Timber.d("showCharacterDetailsFragment")
-//        val action = CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailsFragment(id)
-//        navController.navigate(action)
-//    }
 
     private fun showDetailFragment(product: ProductUI) {
         Timber.d("showDetailFragment")

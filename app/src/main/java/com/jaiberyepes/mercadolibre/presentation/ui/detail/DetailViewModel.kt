@@ -1,4 +1,4 @@
-package com.jaiberyepes.mercadolibre.presentation.detail
+package com.jaiberyepes.mercadolibre.presentation.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,6 @@ import com.jaiberyepes.mercadolibre.domain.usescases.UseCases
 import com.jaiberyepes.mercadolibre.presentation.model.ProductDescriptionUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductDetailUI
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
-import com.jaiberyepes.mercadolibre.presentation.search.SearchViewModel
 import com.jaiberyepes.mercadolibre.util.Output
 import com.jaiberyepes.mercadolibre.util.base.UIState
 import javax.inject.Inject

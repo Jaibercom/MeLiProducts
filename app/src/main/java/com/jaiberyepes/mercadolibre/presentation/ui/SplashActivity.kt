@@ -1,4 +1,4 @@
-package com.jaiberyepes.mercadolibre.presentation
+package com.jaiberyepes.mercadolibre.presentation.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
