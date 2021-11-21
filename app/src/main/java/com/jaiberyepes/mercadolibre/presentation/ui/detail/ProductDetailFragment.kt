@@ -36,8 +36,8 @@ class ProductDetailFragment : Fragment() {
 
     // ViewModel
     @Inject
-    lateinit var mviewModelFactory: DetailViewModelFactory
-    private lateinit var mviewModel: DetailViewModel
+    lateinit var viewModelFactory: DetailViewModelFactory
+    private lateinit var viewModel: DetailViewModel
 
     private lateinit var binding: ProductDetailFragmentBinding
 
@@ -57,7 +57,7 @@ class ProductDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         // ViewModel
-        ViewModelProvider(this, mviewModelFactory)[DetailViewModel::class.java].also { mviewModel = it }
+        ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java].also { viewModel = it }
     }
 
     override fun onCreateView(
@@ -73,12 +73,12 @@ class ProductDetailFragment : Fragment() {
 
         loadingViewStub = view.findViewById(R.id.detailLoadingViewStub)
 
-        observe(mviewModel.currentUIStateLiveData, ::onUIStateChange)
+        observe(viewModel.currentUIStateLiveData, ::onUIStateChange)
     }
 
     override fun onResume() {
         super.onResume()
-        mviewModel.setProduct(args.product)
+        viewModel.setProduct(args.product)
     }
 
     private fun onUIStateChange(uiState: UIState<DetailViewModel.ProductDataType>) =
@@ -123,7 +123,6 @@ class ProductDetailFragment : Fragment() {
 
     private fun showProductDescription(product: ProductDescriptionUI) {
         Timber.d("showProductDetail: $product")
-
         binding.descriptionView.text = product.description
     }
 

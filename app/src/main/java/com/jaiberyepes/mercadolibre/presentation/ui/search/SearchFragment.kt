@@ -150,7 +150,6 @@ class SearchFragment : Fragment(R.layout.fragment_search), ProductsController.Cl
     override fun onProductClicked(product: ProductUI) {
         Timber.d("onProductClicked")
         hideKeyboard()
-//        viewModel.s
         viewModel.navigateTo(
             SearchViewModel.ProductsView.SearchDetailFragment(product)
         )

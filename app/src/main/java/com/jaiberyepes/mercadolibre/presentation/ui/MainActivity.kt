@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-
     private fun onViewChange(destination: SearchViewModel.ProductsView) {
         Timber.d("onCharactersViewChange")
         when (destination) {

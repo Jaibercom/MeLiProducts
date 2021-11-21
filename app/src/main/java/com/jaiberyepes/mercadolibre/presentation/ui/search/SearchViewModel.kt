@@ -33,8 +33,6 @@ class SearchViewModel @Inject constructor(
 
     private var products: List<ProductUI> = listOf()
 
-//    private var productSelected: ProductUI = listOf()
-
     override fun navigateTo(destinationView: ProductsView) {
         currentView.value = destinationView
     }
@@ -56,18 +54,12 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun setDetailScreen(product: ProductUI){
-        currentUIState.value = UIState.Data(ProductsDataType.ProductDetailData(product))
-    }
-
     sealed class ProductsView {
-        object SearchFragment : ProductsView()
         data class SearchDetailFragment(val product: ProductUI) : ProductsView()
     }
 
     sealed class ProductsDataType {
         data class Products(val characters: List<ProductUI>) : ProductsDataType()
-        data class ProductDetailData(val productDetail: ProductUI) : ProductsDataType()
     }
 
 }
