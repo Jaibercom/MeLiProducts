@@ -2,7 +2,9 @@ package com.jaiberyepes.mercadolibre.presentation.ui.search
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewStub
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.SearchView
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jaiberyepes.mercadolibre.R
+import com.jaiberyepes.mercadolibre.databinding.SearchFragmentBinding
 import com.jaiberyepes.mercadolibre.presentation.adapter.ProductsController
 import com.jaiberyepes.mercadolibre.presentation.model.ProductUI
 import com.jaiberyepes.mercadolibre.util.base.UIState
@@ -20,8 +23,6 @@ import com.jaiberyepes.mercadolibre.util.extensions.observe
 import com.jaiberyepes.mercadolibre.util.extensions.visible
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.fragment_search.searchEpoxyRecyclerView
-import kotlinx.android.synthetic.main.fragment_search.search_view
 import timber.log.Timber
 
 /**
@@ -35,6 +36,8 @@ class SearchFragment : Fragment(R.layout.fragment_search), ProductsController.Cl
     @Inject
     lateinit var searchViewModelFactory: SearchViewModelFactory
     private lateinit var viewModel: SearchViewModel
+
+    private lateinit var binding: SearchFragmentBinding
 
     // Epoxy controller
     private val charactersController: ProductsController by lazy {
@@ -52,13 +55,15 @@ class SearchFragment : Fragment(R.layout.fragment_search), ProductsController.Cl
     private val searchListener: SearchView.OnQueryTextListener =
         object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    Timber.d("new query: $it")
+                    viewModel.performSearch(query)
+                }
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
+            override fun onQueryTextChange(newText: String?): Boolean {newText?.let {
                     Timber.d("new text: $it")
-                    viewModel.performSearch("Motorola")
                 }
                 return false
             }
@@ -72,12 +77,20 @@ class SearchFragment : Fragment(R.layout.fragment_search), ProductsController.Cl
 
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = SearchFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupCharactersRecyclerView()
 
-        with(search_view) {
+        with(binding.searchView) {
             configureSearchableInfo()
             setOnQueryTextListener(searchListener)
         }
@@ -93,7 +106,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), ProductsController.Cl
         super.onAttach(context)
     }
 
-    private fun setupCharactersRecyclerView() = searchEpoxyRecyclerView.apply {
+    private fun setupCharactersRecyclerView() = binding.searchEpoxyRecyclerView.apply {
         Timber.d("setupCharactersRecyclerView")
         layoutManager = LinearLayoutManager(context)
         setController(charactersController)

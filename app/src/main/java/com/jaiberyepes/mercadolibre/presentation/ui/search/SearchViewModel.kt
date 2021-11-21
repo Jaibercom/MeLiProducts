@@ -21,11 +21,11 @@ import timber.log.Timber
  */
 class SearchViewModel @Inject constructor(
     private val useCases: UseCases
-) : ViewModel(), NavigationProvider<SearchViewModel.ProductsView> {
+) : ViewModel(), NavigationProvider<SearchViewModel.ProductsView?> {
 
     // Current view LiveData
-    private val currentView = MutableLiveData<ProductsView>()
-    val currentViewLiveData: LiveData<ProductsView> = currentView
+    private val currentView = MutableLiveData<ProductsView?>()
+    val currentViewLiveData: LiveData<ProductsView?> = currentView
 
     // UIState LiveData
     private val currentUIState = MutableLiveData<UIState<ProductsDataType>>()
@@ -33,7 +33,7 @@ class SearchViewModel @Inject constructor(
 
     private var products: List<ProductUI> = listOf()
 
-    override fun navigateTo(destinationView: ProductsView) {
+    override fun navigateTo(destinationView: ProductsView?) {
         currentView.value = destinationView
     }
 

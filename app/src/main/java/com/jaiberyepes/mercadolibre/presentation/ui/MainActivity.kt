@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun onViewChange(destination: SearchViewModel.ProductsView) {
+    private fun onViewChange(destination: SearchViewModel.ProductsView?) {
         Timber.d("onCharactersViewChange")
         when (destination) {
             is SearchViewModel.ProductsView.SearchDetailFragment -> showDetailFragment(destination.product)
@@ -72,5 +72,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         Timber.d("showDetailFragment")
         val action = SearchFragmentDirections.actionSearchFragmentToProductDetailFragment(product)
         navController.navigate(action)
+        searchViewModel.navigateTo(null)
     }
 }
