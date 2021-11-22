@@ -49,7 +49,7 @@ class SearchViewModel @Inject constructor(
                 Timber.d("Products: $products")
                 currentUIState.value = UIState.Data(ProductsDataType.Products(products))
             } else {
-                currentUIState.value = UIState.Error(R.string.characters_error_message)
+                currentUIState.value = UIState.Error(R.string.products_error_message)
             }
         }
     }

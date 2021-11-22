@@ -42,7 +42,7 @@ class DetailViewModel @Inject constructor(
                 Timber.d("Products: $productDetail")
                 currentUIState.value = UIState.Data(ProductDataType.ProductDetailData(productDetail))
             } else {
-                currentUIState.value = UIState.Error(R.string.characters_error_message)
+                currentUIState.value = UIState.Error(R.string.products_error_message)
             }
         }
     }
@@ -57,7 +57,7 @@ class DetailViewModel @Inject constructor(
                 Timber.d("productDescription: $productDescription")
                 currentUIState.value = UIState.Data(ProductDataType.ProductDescriptionData(productDescription))
             } else {
-                currentUIState.value = UIState.Error(R.string.characters_error_message)
+                currentUIState.value = UIState.Error(R.string.products_error_message)
             }
         }
     }

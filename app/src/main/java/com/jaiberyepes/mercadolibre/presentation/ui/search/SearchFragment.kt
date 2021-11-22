@@ -143,7 +143,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), ProductsController.Cl
         if (characters.isNotEmpty()) {
             charactersController.setData(characters)
         } else {
-            showError(R.string.characters_search_error_message)
+            showError(R.string.products_search_error_message)
         }
     }
 
